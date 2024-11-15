@@ -1,0 +1,14 @@
+{
+  "problemMatcher": [
+    {
+      "owner": "workflow-status-check-action",
+      "pattern": [
+        {
+          "regexp": "^(ERROR|WARNING|INFO):\\s(.+)$",
+          "severity": 1,
+          "message": 2
+        }
+      ]
+    }
+  ]
+}
