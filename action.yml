@@ -5,6 +5,10 @@ inputs:
   state:
     description: "The check state. You can use the last step outcome"
     required: true
+  exit-with-failure:
+    description: "Exits the action with a failed outcome if the state equals to 'failure'"
+    required: false
+    default: "true"
 outputs:
   check-run-id:
     description: "The created Check Run ID"
@@ -36,3 +40,8 @@ runs:
 
         echo "Check created with ID: $CHECK_RUN_ID"
         echo "check-run-id=$CHECK_RUN_ID" >> "$GITHUB_OUTPUT"
+
+    - name: Exit with failed status
+      if: ${{ inputs.state == "failure" && inputs.exit-with-failure == "true" }}
+      shell: bash
+      run: exit 1
