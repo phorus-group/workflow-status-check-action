@@ -2,11 +2,11 @@ name: Report Workflow Status Check
 description: An action to report the current workflow status as a GitHub Check
 
 inputs:
-  STATE:
+  state:
     description: "The check state. You can use the last step outcome"
     required: true
 outputs:
-  CHECK_RUN_ID:
+  check-run-id:
     description: "The created Check Run ID"
     value: ${{ steps.report_status_check.outputs.check-run-id }}
 
@@ -19,7 +19,7 @@ runs:
       run: |
         export GH_TOKEN="${{ github.token }}"
         CHECK_NAME="${{ github.workflow }}"
-        STATE="${{ inputs.STATE }}"
+        STATE="${{ inputs.state }}"
         DESCRIPTION="Workflow state - ${STATE}."
       
         echo "The '$CHECK_NAME' state is - $STATE"

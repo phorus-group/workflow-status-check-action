@@ -1,0 +1,31 @@
+name: Verify Action
+
+on:
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  self_check:
+    name: Run this Action
+    runs-on: ubuntu-latest
+    steps:
+      - name: "Clone action"
+        uses: actions/checkout@v4
+
+      - name: "Call action"
+        id: action
+        uses: ./
+        with:
+          state: success
+
+  enforce-all-checks:
+    name: Enforce all checks
+    runs-on: ubuntu-latest
+    permissions:
+      checks: read
+    steps:
+      - name: Enforce all checks
+        uses: poseidon/wait-for-status-checks@main
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          ignore: Enforce all checks
