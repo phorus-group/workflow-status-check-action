@@ -42,6 +42,6 @@ runs:
         echo "check-run-id=$CHECK_RUN_ID" >> "$GITHUB_OUTPUT"
 
     - name: Exit with failed status
-      if: ${{ inputs.state == "failure" && inputs.exit-with-failure == "true" }}
+      if: ${{ inputs.state == 'failure' && inputs.exit-with-failure == 'true' }}
       shell: bash
       run: exit 1
